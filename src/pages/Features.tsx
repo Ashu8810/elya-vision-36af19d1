@@ -1,4 +1,5 @@
-import { MessageSquare, GitBranch, BookOpen, Brain } from "lucide-react";
+import { MessageSquare, GitBranch, BookOpen, Brain, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import GetStartedButton from "@/components/GetStartedButton";
 
 const featuresData = [
@@ -42,14 +43,23 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="dark min-h-screen bg-background">
+      {/* Back link */}
+      <Link
+        to="/"
+        className="fixed top-6 left-6 z-50 flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </Link>
+
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4">
+      <section className="pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <span className="text-sm text-primary font-medium uppercase tracking-wide">Features</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
             Powerful Tools for{" "}
             <span className="text-primary">Smarter Learning</span>
           </h1>
@@ -61,7 +71,7 @@ const Features = () => {
       </section>
 
       {/* Feature Sections */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto space-y-32">
           {featuresData.map((feature, index) => {
             const isReversed = index % 2 === 1;
@@ -74,14 +84,14 @@ const Features = () => {
               >
                 {/* Text Content */}
                 <div className="flex-1 space-y-6">
-                  <span className="text-6xl sm:text-7xl font-bold text-muted/20">
+                  <span className="text-6xl sm:text-7xl font-bold text-primary/20">
                     {feature.number}
                   </span>
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-primary uppercase tracking-widest">
                       {feature.subtitle}
                     </p>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-white">
                       <span className="text-primary">{feature.accent}</span> — {feature.title}
                     </h2>
                   </div>
@@ -92,30 +102,31 @@ const Features = () => {
 
                 {/* UI Preview Card */}
                 <div className="flex-1 w-full max-w-lg">
-                  <div className="aspect-[4/3] rounded-3xl bg-card border border-border shadow-xl overflow-hidden">
-                    <div className="h-full flex flex-col">
-                      {/* Mock header */}
-                      <div className="flex items-center gap-2 px-6 py-4 border-b border-border">
-                        <div className="flex gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-destructive/50" />
-                          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                          <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                        </div>
-                        <div className="flex-1 flex justify-center">
-                          <div className="px-4 py-1 rounded-lg bg-muted text-xs text-muted-foreground">
-                            ELYAITRA / {feature.title}
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-3xl" />
+                    <div className="relative aspect-[4/3] rounded-3xl bg-card border border-border/30 shadow-xl overflow-hidden">
+                      <div className="h-full flex flex-col">
+                        <div className="flex items-center gap-2 px-6 py-4 border-b border-border/30">
+                          <div className="flex gap-1.5">
+                            <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                            <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                          </div>
+                          <div className="flex-1 flex justify-center">
+                            <div className="px-4 py-1 rounded-lg bg-muted/30 text-xs text-muted-foreground">
+                              ELYAITRA / {feature.title}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      {/* Mock content */}
-                      <div className="flex-1 p-6 flex items-center justify-center">
-                        <div className="text-center space-y-4">
-                          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                            <Icon className="w-8 h-8 text-primary" />
-                          </div>
-                          <div className="space-y-2">
-                            <div className="h-3 w-32 bg-muted rounded mx-auto" />
-                            <div className="h-2 w-24 bg-muted/50 rounded mx-auto" />
+                        <div className="flex-1 p-6 flex items-center justify-center">
+                          <div className="text-center space-y-4">
+                            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto border border-primary/30">
+                              <Icon className="w-8 h-8 text-primary" />
+                            </div>
+                            <div className="space-y-2">
+                              <div className="h-3 w-32 bg-muted/30 rounded mx-auto" />
+                              <div className="h-2 w-24 bg-muted/20 rounded mx-auto" />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -129,15 +140,15 @@ const Features = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-muted/30">
+      <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Ready to Experience the Future of Learning?
           </h2>
           <p className="text-muted-foreground text-lg mb-8">
             Start your journey with ELYAITRA today and unlock your full potential.
           </p>
-          <GetStartedButton size="lg" />
+          <GetStartedButton />
         </div>
       </section>
     </div>
