@@ -66,25 +66,25 @@ const FeatureSection = ({
         }`}
       >
         <div className="relative group">
-          {/* Multi-layer glow effects */}
-          <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          {/* Device frame */}
-          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.4)] transition-transform duration-500 group-hover:scale-[1.01]">
-            {/* Metallic frame border */}
-            <div className="absolute inset-0 rounded-3xl border border-gray-700/50 pointer-events-none z-10" />
+          {/* Dark card container with rounded corners */}
+          <div className="relative bg-[#0a0a0a] rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-[1.02]">
+            {/* Top rounded corners accent */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-b-2xl" />
             
-            {mockupImage ? (
-              <img 
-                src={mockupImage} 
-                alt={title}
-                className="w-full h-auto object-cover rounded-3xl"
-              />
-            ) : (
-              <div className="aspect-[4/3] bg-gray-900 flex items-center justify-center">
-                <Icon className="w-20 h-20 text-primary/50" />
-              </div>
-            )}
+            {/* Inner content area */}
+            <div className="relative rounded-2xl overflow-hidden mt-2">
+              {mockupImage ? (
+                <img 
+                  src={mockupImage} 
+                  alt={title}
+                  className="w-full h-auto object-cover rounded-2xl"
+                />
+              ) : (
+                <div className="aspect-[4/3] bg-[#111] flex items-center justify-center rounded-2xl">
+                  <Icon className="w-20 h-20 text-primary/50" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
