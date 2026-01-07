@@ -53,40 +53,49 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center">
-        {/* Background glow beam effect */}
+        {/* Animated background glow beam */}
         <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-1/4 w-32 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent blur-[100px] opacity-60" />
+          <div className="absolute top-0 right-1/4 w-32 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent blur-[100px] opacity-60 animate-pulse-glow" />
           <div className="absolute top-0 right-1/4 w-16 h-[80%] bg-gradient-to-b from-primary via-primary to-transparent blur-[40px] opacity-80" />
-          <div className="absolute top-0 right-1/4 w-4 h-[70%] bg-primary blur-sm" />
+          <div className="absolute top-0 right-1/4 w-4 h-[70%] bg-primary blur-sm animate-beam" />
         </div>
 
         {/* Floating particles */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-primary rounded-full animate-pulse" />
-          <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-primary/50 rounded-full animate-pulse delay-300" />
-          <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-primary/30 rounded-full animate-pulse delay-500" />
-          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-white/20 rounded-full" />
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float opacity-60" style={{ animationDelay: "0s" }} />
+          <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-primary/50 rounded-full animate-float" style={{ animationDelay: "0.5s" }} />
+          <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-primary/30 rounded-full animate-float" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-white/20 rounded-full animate-float" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-2/3 left-1/5 w-1.5 h-1.5 bg-primary/40 rounded-full animate-float" style={{ animationDelay: "2s" }} />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
           <div className="max-w-2xl">
-            {/* Main heading */}
+            {/* Main heading with staggered animation */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              <span className="text-muted-foreground italic">Because School</span>
+              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                <span className="text-muted-foreground italic">Because School</span>
+              </span>
               <br />
-              <span className="text-muted-foreground italic">Won't Teach </span>
-              <span className="text-primary italic">You </span>
-              <span className="text-white">This!</span>
+              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                <span className="text-muted-foreground italic">Won't Teach </span>
+                <span className="text-primary italic">You </span>
+              </span>
+              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+                <span className="text-white">This!</span>
+              </span>
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg text-muted-foreground mb-10 max-w-xl">
+            <p className="text-lg text-muted-foreground mb-10 max-w-xl opacity-0 animate-fade-in" style={{ animationDelay: "0.7s" }}>
               Master any subject with AI-powered tools that adapt to your learning style. 
               Build real understanding, ace your exams, and unlock your full potential.
             </p>
 
             {/* CTA Button */}
-            <GetStartedButton>Start Learning Now</GetStartedButton>
+            <div className="opacity-0 animate-fade-in" style={{ animationDelay: "0.9s" }}>
+              <GetStartedButton>Start Learning Now</GetStartedButton>
+            </div>
           </div>
         </div>
       </section>
@@ -95,36 +104,36 @@ const Index = () => {
       <section className="relative py-20 px-6">
         <div className="max-w-5xl mx-auto">
           {/* Mock laptop device */}
-          <div className="relative mx-auto">
+          <div className="relative mx-auto opacity-0 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             {/* Glow under device */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 bg-primary/30 blur-[60px]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 bg-primary/30 blur-[60px] animate-pulse-glow" />
             
             {/* Laptop frame */}
             <div className="relative rounded-t-3xl border border-border/30 bg-card overflow-hidden shadow-2xl">
               {/* Screen content with floating text */}
               <div className="aspect-[16/10] p-8 relative">
-                {/* Floating problem statements */}
-                <div className="absolute top-8 left-8 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                {/* Floating problem statements with staggered animation */}
+                <div className="absolute top-8 left-8 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "0s" }}>
                   <p className="text-sm text-muted-foreground">Struggling to understand?</p>
                 </div>
                 
-                <div className="absolute top-1/4 right-12 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                <div className="absolute top-1/4 right-12 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "0.3s" }}>
                   <p className="text-sm text-white font-medium">Can't crack concepts?</p>
                 </div>
                 
-                <div className="absolute top-1/2 left-16 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                <div className="absolute top-1/2 left-16 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "0.6s" }}>
                   <p className="text-sm text-primary font-bold">Confused?</p>
                 </div>
                 
-                <div className="absolute top-1/3 left-1/3 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                <div className="absolute top-1/3 left-1/3 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "0.9s" }}>
                   <p className="text-sm text-muted-foreground">Too many resources, no direction?</p>
                 </div>
                 
-                <div className="absolute bottom-1/4 right-1/4 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                <div className="absolute bottom-1/4 right-1/4 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "1.2s" }}>
                   <p className="text-sm text-white font-medium">Feeling left behind</p>
                 </div>
                 
-                <div className="absolute bottom-8 left-1/4 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20">
+                <div className="absolute bottom-8 left-1/4 px-4 py-2 rounded-xl bg-muted/20 backdrop-blur-sm border border-border/20 animate-float" style={{ animationDelay: "1.5s" }}>
                   <p className="text-sm text-muted-foreground">Exams coming, nothing's clear</p>
                 </div>
               </div>
@@ -162,13 +171,13 @@ const Index = () => {
         <div className="relative z-10 max-w-5xl mx-auto">
           {/* Section header */}
           <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-4">
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               How It Works
             </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               From Confused to <span className="text-primary">Confident</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               Your journey with ELYAITRA in 4 simple steps
             </p>
           </div>
@@ -181,6 +190,7 @@ const Index = () => {
                   number={step.number}
                   title={step.title}
                   description={step.description}
+                  delay={index * 150}
                 />
                 {/* Connector line */}
                 {index < steps.length - 1 && (
@@ -217,9 +227,9 @@ const Index = () => {
             </span>
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+            <a href="#" className="hover:text-white transition-colors duration-300">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors duration-300">Terms</a>
+            <a href="#" className="hover:text-white transition-colors duration-300">Contact</a>
           </div>
         </div>
       </footer>

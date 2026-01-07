@@ -12,11 +12,11 @@ const GetStartedButton = ({ className, children = "Get Started" }: GetStartedBut
     <Link
       to="/signup"
       className={cn(
-        "inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg transition-all duration-300 glow-primary hover:glow-primary-hover hover:brightness-110 active:scale-[0.98]",
+        "group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg transition-all duration-300 glow-primary hover:glow-primary-hover hover:brightness-110 active:scale-[0.98]",
         className
       )}
     >
-      <Sparkles className="w-5 h-5" />
+      <Sparkles className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
       {children}
     </Link>
   );

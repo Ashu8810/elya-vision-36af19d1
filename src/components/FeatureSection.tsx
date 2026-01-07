@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { LucideIcon } from "lucide-react";
 
 interface FeatureSectionProps {
@@ -17,14 +18,43 @@ const FeatureSection = ({
   icon: Icon,
   reversed = false,
 }: FeatureSectionProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
+      ref={sectionRef}
       className={`flex flex-col ${
         reversed ? "lg:flex-row-reverse" : "lg:flex-row"
       } gap-12 lg:gap-20 items-center py-20`}
     >
       {/* Text Content */}
-      <div className="flex-1 space-y-6">
+      <div
+        className={`flex-1 space-y-6 transition-all duration-700 ${
+          isVisible
+            ? "opacity-100 translate-x-0"
+            : reversed
+            ? "opacity-0 translate-x-10"
+            : "opacity-0 -translate-x-10"
+        }`}
+      >
         <span className="text-5xl font-bold text-primary">{number}</span>
         <p className="text-sm font-semibold text-primary uppercase tracking-widest">
           {tagline}
@@ -38,13 +68,21 @@ const FeatureSection = ({
       </div>
 
       {/* Mock UI Preview */}
-      <div className="flex-1 w-full max-w-xl">
-        <div className="relative">
+      <div
+        className={`flex-1 w-full max-w-xl transition-all duration-700 delay-200 ${
+          isVisible
+            ? "opacity-100 translate-x-0"
+            : reversed
+            ? "opacity-0 -translate-x-10"
+            : "opacity-0 translate-x-10"
+        }`}
+      >
+        <div className="relative group">
           {/* Glow effect behind */}
-          <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-3xl" />
+          <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-3xl transition-all duration-500 group-hover:bg-primary/30" />
           
           {/* Device frame */}
-          <div className="relative rounded-3xl border border-border/30 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl">
+          <div className="relative rounded-3xl border border-border/30 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
             {/* Browser header */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-background/50">
               <div className="flex gap-1.5">
@@ -62,7 +100,7 @@ const FeatureSection = ({
             {/* Content area */}
             <div className="aspect-[4/3] p-8 flex items-center justify-center">
               <div className="text-center space-y-4">
-                <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30">
+                <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/30">
                   <Icon className="w-10 h-10 text-primary" />
                 </div>
                 <div className="space-y-2">
