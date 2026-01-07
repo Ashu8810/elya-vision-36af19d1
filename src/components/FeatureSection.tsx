@@ -43,16 +43,21 @@ const FeatureSection = ({
     return () => observer.disconnect();
   }, []);
 
+  // Split title to highlight first part in primary color
+  const titleParts = title.split(' — ');
+  const highlightedTitle = titleParts[0];
+  const restOfTitle = titleParts[1] || '';
+
   return (
     <div
       ref={sectionRef}
       className={`flex flex-col ${
-        reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-      } gap-12 lg:gap-20 items-center py-20`}
+        reversed ? "lg:flex-row" : "lg:flex-row-reverse"
+      } gap-8 lg:gap-16 items-center py-24 lg:py-32`}
     >
-      {/* Text Content */}
+      {/* Large Image - 60% width */}
       <div
-        className={`flex-1 space-y-6 transition-all duration-700 ${
+        className={`w-full lg:w-[60%] transition-all duration-700 delay-100 ${
           isVisible
             ? "opacity-100 translate-x-0"
             : reversed
@@ -60,27 +65,33 @@ const FeatureSection = ({
             : "opacity-0 -translate-x-10"
         }`}
       >
-        <span className="text-5xl font-bold text-primary">{number}</span>
-        <p className="text-sm font-semibold text-primary uppercase tracking-widest">
-          {tagline}
-        </p>
-        <h3 className={cn(
-          "text-3xl sm:text-4xl font-bold leading-tight",
-          lightMode ? "text-gray-900" : "text-white"
-        )}>
-          {title}
-        </h3>
-        <p className={cn(
-          "text-lg leading-relaxed max-w-lg",
-          lightMode ? "text-gray-600" : "text-muted-foreground"
-        )}>
-          {description}
-        </p>
+        <div className="relative group">
+          {/* Multi-layer glow effects */}
+          <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          {/* Device frame */}
+          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.4)] transition-transform duration-500 group-hover:scale-[1.01]">
+            {/* Metallic frame border */}
+            <div className="absolute inset-0 rounded-3xl border border-gray-700/50 pointer-events-none z-10" />
+            
+            {mockupImage ? (
+              <img 
+                src={mockupImage} 
+                alt={title}
+                className="w-full h-auto object-cover rounded-3xl"
+              />
+            ) : (
+              <div className="aspect-[4/3] bg-gray-900 flex items-center justify-center">
+                <Icon className="w-20 h-20 text-primary/50" />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Mock UI Preview */}
+      {/* Text Content - 40% width */}
       <div
-        className={`flex-1 w-full max-w-xl transition-all duration-700 delay-200 ${
+        className={`w-full lg:w-[40%] space-y-6 transition-all duration-700 ${
           isVisible
             ? "opacity-100 translate-x-0"
             : reversed
@@ -88,77 +99,45 @@ const FeatureSection = ({
             : "opacity-0 translate-x-10"
         }`}
       >
-        <div className="relative group">
-          {/* Glow effect behind */}
-          <div className={cn(
-            "absolute inset-0 blur-[60px] rounded-3xl transition-all duration-500 group-hover:opacity-100",
-            lightMode ? "bg-primary/15 group-hover:bg-primary/25" : "bg-primary/20 group-hover:bg-primary/30"
-          )} />
-          
-          {/* Device frame with mockup image */}
-          <div className={cn(
-            "relative rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]",
-            lightMode 
-              ? "shadow-gray-300/50" 
-              : "shadow-primary/10"
-          )}>
-            {mockupImage ? (
-              <img 
-                src={mockupImage} 
-                alt={title}
-                className="w-full h-auto object-cover"
-              />
-            ) : (
-              <>
-                {/* Fallback: Browser header */}
-                <div className={cn(
-                  "flex items-center gap-2 px-4 py-3 border-b",
-                  lightMode ? "border-gray-800 bg-gray-900" : "border-border/30 bg-background/50"
-                )}>
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <div className={cn(
-                      "px-4 py-1 rounded-lg text-xs",
-                      lightMode ? "bg-gray-800 text-gray-400" : "bg-muted/30 text-muted-foreground"
-                    )}>
-                      elyaitra.ai
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Fallback: Content area */}
-                <div className={cn(
-                  "aspect-[4/3] p-8 flex items-center justify-center border",
-                  lightMode ? "bg-gray-900 border-gray-200" : "border-border/30 bg-card/80"
-                )}>
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/30">
-                      <Icon className="w-10 h-10 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className={cn(
-                        "h-4 w-40 rounded mx-auto",
-                        lightMode ? "bg-gray-700" : "bg-muted/30"
-                      )} />
-                      <div className={cn(
-                        "h-3 w-32 rounded mx-auto",
-                        lightMode ? "bg-gray-800" : "bg-muted/20"
-                      )} />
-                      <div className={cn(
-                        "h-3 w-36 rounded mx-auto",
-                        lightMode ? "bg-gray-800" : "bg-muted/20"
-                      )} />
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+        {/* Large number */}
+        <span className={cn(
+          "block text-7xl sm:text-8xl lg:text-9xl font-black tracking-tight",
+          lightMode ? "text-gray-900" : "text-white"
+        )}>
+          {number}
+        </span>
+        
+        {/* Tagline */}
+        <p className={cn(
+          "text-sm font-bold uppercase tracking-[0.2em]",
+          lightMode ? "text-gray-600" : "text-muted-foreground"
+        )}>
+          {tagline}
+        </p>
+        
+        {/* Divider line */}
+        <div className="w-16 h-1 bg-primary rounded-full" />
+        
+        {/* Title with highlighted first part */}
+        <h3 className={cn(
+          "text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight",
+          lightMode ? "text-gray-900" : "text-white"
+        )}>
+          <span className="text-primary">{highlightedTitle}</span>
+          {restOfTitle && (
+            <>
+              <span className={lightMode ? "text-gray-900" : "text-white"}> — {restOfTitle}</span>
+            </>
+          )}
+        </h3>
+        
+        {/* Description */}
+        <p className={cn(
+          "text-lg lg:text-xl leading-relaxed",
+          lightMode ? "text-gray-600" : "text-muted-foreground"
+        )}>
+          {description}
+        </p>
       </div>
     </div>
   );
