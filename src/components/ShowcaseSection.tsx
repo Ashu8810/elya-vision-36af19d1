@@ -109,59 +109,31 @@ const ShowcaseSection = () => {
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          {/* Device frame */}
-          <div className="relative mx-auto max-w-4xl">
-            {/* Multi-layer glow effects */}
-            <div className="absolute -inset-8 bg-gradient-to-b from-primary/30 via-transparent to-primary/30 rounded-[40px] blur-3xl opacity-60" />
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 rounded-3xl blur-2xl animate-pulse-glow" />
+          {/* Image showcase */}
+          <div className="relative mx-auto max-w-5xl">
+            {/* Glow effects */}
+            <div className="absolute -inset-8 bg-gradient-to-b from-primary/20 via-transparent to-primary/20 rounded-[40px] blur-3xl opacity-60" />
             
-            {/* 3D perspective wrapper */}
-            <div className="relative" style={{ perspective: '1000px' }}>
-              {/* Outer metallic frame */}
-              <div className="relative p-1 rounded-3xl bg-gradient-to-b from-gray-600 via-gray-800 to-gray-900 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
-                {/* Inner bezel */}
-                <div className="relative p-1 rounded-[22px] bg-gradient-to-b from-gray-700 to-gray-900">
-                  {/* Screen container */}
-                  <div className="relative rounded-[18px] overflow-hidden bg-black">
-                    {/* Screen reflection overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none z-20" />
-                    
-                    {/* Image carousel */}
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      {showcaseItems.map((item, index) => (
-                        <div
-                          key={index}
-                          className={`absolute inset-0 transition-all duration-1000 ease-out ${
-                            index === activeIndex
-                              ? "opacity-100 scale-100 blur-0"
-                              : "opacity-0 scale-110 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-contain bg-gray-900"
-                          />
-                        </div>
-                      ))}
-
-                      {/* Animated scan line effect */}
-                      <div 
-                        className="absolute inset-0 pointer-events-none z-10"
-                        style={{
-                          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)'
-                        }}
-                      />
-
-                      {/* Bottom gradient fade */}
-                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none z-10" />
-                    </div>
+            {/* Image carousel - no frame */}
+            <div className="relative">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
+                {showcaseItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-1000 ease-out ${
+                      index === activeIndex
+                        ? "opacity-100 scale-100 blur-0"
+                        : "opacity-0 scale-110 blur-sm"
+                    }`}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                </div>
+                ))}
               </div>
-
-              {/* Stand/base reflection */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-8 bg-gradient-to-b from-gray-800 to-transparent rounded-b-full blur-sm opacity-50" />
             </div>
 
             {/* Floating animated label */}
