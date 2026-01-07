@@ -1,11 +1,10 @@
-import { MessageSquare, GitBranch, BookOpen, Brain } from "lucide-react";
+import { MessageSquare, GitBranch, BookOpen, Brain, Users, Star, Zap, GraduationCap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import GetStartedButton from "@/components/GetStartedButton";
 import FeatureSection from "@/components/FeatureSection";
 import ProblemSection from "@/components/ProblemSection";
 import CommunitySection from "@/components/CommunitySection";
 import HowItWorksSection from "@/components/HowItWorksSection";
-
 
 import aiChatMockup from "@/assets/ai-chat-mockup.png";
 import flowchartMockup from "@/assets/flowchart-mockup.png";
@@ -57,13 +56,16 @@ const Index = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center">
+      <section className="relative min-h-screen flex items-center justify-center">
         {/* Animated background glow beam */}
         <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-1/4 w-32 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent blur-[100px] opacity-60 animate-pulse-glow" />
           <div className="absolute top-0 right-1/4 w-16 h-[80%] bg-gradient-to-b from-primary via-primary to-transparent blur-[40px] opacity-80" />
           <div className="absolute top-0 right-1/4 w-4 h-[70%] bg-primary blur-sm animate-beam" />
         </div>
+
+        {/* Left glow */}
+        <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary/20 rounded-full blur-[150px] pointer-events-none" />
 
         {/* Floating particles */}
         <div className="absolute inset-0 pointer-events-none">
@@ -74,32 +76,76 @@ const Index = () => {
           <div className="absolute top-2/3 left-1/5 w-1.5 h-1.5 bg-primary/40 rounded-full animate-float" style={{ animationDelay: "2s" }} />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
-          <div className="max-w-2xl">
-            {/* Main heading with staggered animation */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <span className="text-muted-foreground italic">Because School</span>
-              </span>
-              <br />
-              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <span className="text-muted-foreground italic">Won't Teach </span>
-                <span className="text-primary italic">You </span>
-              </span>
-              <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-                <span className="text-white">This!</span>
-              </span>
-            </h1>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
+          {/* Trust badge */}
+          <div className="opacity-0 animate-fade-in mb-8" style={{ animationDelay: "0s" }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+              <GraduationCap className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary font-medium">Trusted by 10,000+ Students</span>
+              <div className="flex items-center gap-0.5 ml-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+            </div>
+          </div>
 
-            {/* Subheading */}
-            <p className="text-lg text-muted-foreground mb-10 max-w-xl opacity-0 animate-fade-in" style={{ animationDelay: "0.7s" }}>
-              Master any subject with AI-powered tools that adapt to your learning style. 
-              Build real understanding, ace your exams, and unlock your full potential.
-            </p>
+          {/* Main heading with staggered animation */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8">
+            <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <span className="text-muted-foreground italic">Because School</span>
+            </span>
+            <br />
+            <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              <span className="text-muted-foreground italic">Won't Teach </span>
+              <span className="text-primary italic">You </span>
+            </span>
+            <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+              <span className="text-white">This!</span>
+            </span>
+          </h1>
 
-            {/* CTA Button */}
-            <div className="opacity-0 animate-fade-in" style={{ animationDelay: "0.9s" }}>
-              <GetStartedButton>Start Learning Now</GetStartedButton>
+          {/* Subheading */}
+          <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto opacity-0 animate-fade-in leading-relaxed" style={{ animationDelay: "0.7s" }}>
+            Master any subject with AI-powered tools that adapt to your learning style. 
+            Build real understanding, ace your exams, and unlock your full potential.
+          </p>
+
+          {/* CTA Button */}
+          <div className="opacity-0 animate-fade-in mb-12" style={{ animationDelay: "0.9s" }}>
+            <GetStartedButton>Start Learning Now — It's Free</GetStartedButton>
+          </div>
+
+          {/* Stats row */}
+          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "1.1s" }}>
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Users className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-left">
+                  <p className="text-2xl font-bold text-white">10K+</p>
+                  <p className="text-xs text-muted-foreground">Active Students</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-left">
+                  <p className="text-2xl font-bold text-white">500K+</p>
+                  <p className="text-xs text-muted-foreground">Questions Solved</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Star className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-left">
+                  <p className="text-2xl font-bold text-white">4.9/5</p>
+                  <p className="text-xs text-muted-foreground">Student Rating</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
