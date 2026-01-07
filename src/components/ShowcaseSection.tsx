@@ -111,53 +111,66 @@ const ShowcaseSection = () => {
         >
           {/* Device frame */}
           <div className="relative mx-auto max-w-4xl">
-            {/* Outer glow frame */}
-            <div className="absolute -inset-4 bg-gradient-to-b from-primary/20 via-primary/5 to-primary/20 rounded-3xl blur-xl" />
+            {/* Multi-layer glow effects */}
+            <div className="absolute -inset-8 bg-gradient-to-b from-primary/30 via-transparent to-primary/30 rounded-[40px] blur-3xl opacity-60" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 rounded-3xl blur-2xl animate-pulse-glow" />
             
-            {/* Device container */}
-            <div className="relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden shadow-2xl shadow-primary/10">
-              {/* Browser bar */}
-              <div className="flex items-center gap-3 px-4 py-3 border-b border-border/30 bg-background/80">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="px-6 py-1 rounded-lg bg-muted/30 text-muted-foreground text-sm">
-                    elyaitra.ai
+            {/* 3D perspective wrapper */}
+            <div className="relative" style={{ perspective: '1000px' }}>
+              {/* Outer metallic frame */}
+              <div className="relative p-1 rounded-3xl bg-gradient-to-b from-gray-600 via-gray-800 to-gray-900 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+                {/* Inner bezel */}
+                <div className="relative p-1 rounded-[22px] bg-gradient-to-b from-gray-700 to-gray-900">
+                  {/* Screen container */}
+                  <div className="relative rounded-[18px] overflow-hidden bg-black">
+                    {/* Screen reflection overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none z-20" />
+                    
+                    {/* Image carousel */}
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      {showcaseItems.map((item, index) => (
+                        <div
+                          key={index}
+                          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+                            index === activeIndex
+                              ? "opacity-100 scale-100 blur-0"
+                              : "opacity-0 scale-110 blur-sm"
+                          }`}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-contain bg-gray-900"
+                          />
+                        </div>
+                      ))}
+
+                      {/* Animated scan line effect */}
+                      <div 
+                        className="absolute inset-0 pointer-events-none z-10"
+                        style={{
+                          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)'
+                        }}
+                      />
+
+                      {/* Bottom gradient fade */}
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none z-10" />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Image carousel */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                {showcaseItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-all duration-700 ${
-                      index === activeIndex
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-105"
-                    }`}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-              </div>
+              {/* Stand/base reflection */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-8 bg-gradient-to-b from-gray-800 to-transparent rounded-b-full blur-sm opacity-50" />
             </div>
 
-            {/* Floating label */}
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-primary/30 shadow-lg">
-              <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-              <span className="text-white font-bold text-lg">
+            {/* Floating animated label */}
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-card via-card to-card border border-primary/40 shadow-[0_10px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(var(--primary)/0.3)]">
+              <div className="relative">
+                <div className="w-4 h-4 rounded-full bg-primary animate-pulse" />
+                <div className="absolute inset-0 w-4 h-4 rounded-full bg-primary animate-ping opacity-50" />
+              </div>
+              <span className="text-white font-bold text-xl tracking-wide">
                 {showcaseItems[activeIndex].title}
               </span>
             </div>
