@@ -8,12 +8,12 @@ interface ProblemCard {
 }
 
 const problemCards: ProblemCard[] = [
-  { text: "Struggling to understand?", position: { x: "8%", y: "12%" }, variant: "default", delay: 0 },
-  { text: "Can't crack concepts?", position: { x: "72%", y: "8%" }, variant: "emphasis", delay: 0.2 },
-  { text: "Confused?", position: { x: "5%", y: "52%" }, variant: "highlight", delay: 0.4 },
-  { text: "Too many resources, no direction?", position: { x: "52%", y: "32%" }, variant: "default", delay: 0.6 },
-  { text: "Feeling left behind", position: { x: "68%", y: "65%" }, variant: "emphasis", delay: 0.8 },
-  { text: "Exams coming, nothing's clear", position: { x: "18%", y: "75%" }, variant: "default", delay: 1 },
+  { text: "Struggling to understand?", position: { x: "10%", y: "18%" }, variant: "default", delay: 0 },
+  { text: "Can't crack concepts?", position: { x: "70%", y: "12%" }, variant: "emphasis", delay: 0.2 },
+  { text: "Confused?", position: { x: "3%", y: "50%" }, variant: "highlight", delay: 0.4 },
+  { text: "Too many resources, no direction?", position: { x: "55%", y: "38%" }, variant: "default", delay: 0.6 },
+  { text: "Feeling left behind", position: { x: "65%", y: "62%" }, variant: "emphasis", delay: 0.8 },
+  { text: "Exams coming, nothing's clear", position: { x: "15%", y: "72%" }, variant: "default", delay: 1 },
 ];
 
 const ProblemSection = () => {
@@ -38,47 +38,26 @@ const ProblemSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 px-6 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        {/* Subtle grid */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]" 
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} 
-        />
-        {/* Radial gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--primary)/0.08)_0%,_transparent_70%)]" />
-      </div>
+    <section ref={sectionRef} className="relative py-24 px-6 overflow-hidden bg-[#0a0c10]">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,186,255,0.05)_0%,_transparent_60%)]" />
 
       <div className="max-w-6xl mx-auto relative">
         {/* Section header */}
-        <div className={`text-center mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Sound Familiar?</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Every Student's Struggle</h2>
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white italic">Every Student's Struggle</h2>
         </div>
 
         {/* Main container */}
-        <div className={`relative aspect-[16/9] max-w-5xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Outer frame */}
-          <div className="absolute inset-0 rounded-3xl border border-white/[0.06] bg-gradient-to-b from-white/[0.02] to-transparent" />
+        <div className={`relative aspect-[16/10] max-w-5xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Outer frame with gradient border */}
+          <div className="absolute inset-0 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0d1117] to-[#0a0c10]" />
           
-          {/* Animated SVG lines connecting to center */}
+          {/* Animated SVG dashed lines connecting to center */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            
-            {/* Animated connecting lines */}
             {problemCards.map((card, i) => {
-              const startX = parseFloat(card.position.x) + 8;
-              const startY = parseFloat(card.position.y) + 4;
+              const startX = parseFloat(card.position.x) + 10;
+              const startY = parseFloat(card.position.y) + 5;
               return (
                 <line
                   key={i}
@@ -86,11 +65,11 @@ const ProblemSection = () => {
                   y1={startY}
                   x2="50"
                   y2="50"
-                  stroke="url(#lineGradient)"
-                  strokeWidth="0.15"
-                  strokeDasharray="2 2"
-                  className="animate-pulse-glow"
-                  style={{ animationDelay: `${card.delay}s` }}
+                  stroke="rgba(100,120,140,0.3)"
+                  strokeWidth="0.2"
+                  strokeDasharray="1.5 1.5"
+                  className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                  style={{ transitionDelay: `${card.delay + 0.5}s` }}
                 />
               );
             })}
@@ -98,32 +77,27 @@ const ProblemSection = () => {
 
           {/* Floating dots on lines */}
           {[
-            { x: "28%", y: "28%" },
-            { x: "65%", y: "22%" },
-            { x: "25%", y: "55%" },
-            { x: "42%", y: "60%" },
-            { x: "72%", y: "52%" },
-            { x: "58%", y: "42%" },
+            { x: "30%", y: "30%" },
+            { x: "62%", y: "25%" },
+            { x: "25%", y: "52%" },
+            { x: "45%", y: "58%" },
+            { x: "70%", y: "48%" },
+            { x: "55%", y: "55%" },
+            { x: "50%", y: "8%" },
+            { x: "78%", y: "42%" },
           ].map((pos, i) => (
             <div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-primary/40 animate-pulse-glow"
-              style={{ left: pos.x, top: pos.y, animationDelay: `${i * 0.3}s` }}
+              className={`absolute w-1.5 h-1.5 rounded-full bg-primary/50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+              style={{ left: pos.x, top: pos.y, transitionDelay: `${i * 0.15}s` }}
             />
           ))}
 
           {/* Central element */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-            {/* Outer glow ring */}
-            <div className="absolute -inset-8 rounded-full bg-primary/10 blur-2xl animate-pulse-glow" />
-            
-            {/* Pulsing rings */}
-            <div className="absolute -inset-4 rounded-2xl border border-primary/20 animate-ping opacity-20" style={{ animationDuration: '3s' }} />
-            <div className="absolute -inset-2 rounded-xl border border-primary/30 animate-ping opacity-30" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
-            
             {/* Main box */}
-            <div className="relative w-20 h-20 rounded-2xl bg-card/80 backdrop-blur-sm border border-primary/30 flex items-center justify-center shadow-[0_0_40px_rgba(7,186,255,0.2)]">
-              <span className="text-4xl font-bold text-primary animate-pulse">?</span>
+            <div className="relative w-24 h-24 rounded-2xl bg-[#0d1117] border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(7,186,255,0.15)]">
+              <span className="text-5xl font-bold text-primary">?</span>
             </div>
           </div>
 
@@ -142,19 +116,18 @@ const ProblemSection = () => {
             >
               <div
                 className={`
-                  px-5 py-3 rounded-xl backdrop-blur-md border shadow-lg
+                  px-5 py-3 rounded-xl border
                   transition-all duration-300 hover:scale-105 cursor-default
                   ${card.variant === 'highlight' 
-                    ? 'bg-primary/20 border-primary/40 shadow-primary/20' 
+                    ? 'bg-primary/10 border-primary/50 shadow-[0_0_20px_rgba(7,186,255,0.3)]' 
                     : card.variant === 'emphasis'
-                    ? 'bg-card/60 border-white/20 shadow-white/5'
-                    : 'bg-card/40 border-white/10 shadow-black/20'
+                    ? 'bg-[#1a1f2e] border-white/15'
+                    : 'bg-[#13161d] border-white/10'
                   }
                 `}
               >
                 <p className={`text-sm font-medium whitespace-nowrap ${
-                  card.variant === 'highlight' ? 'text-primary' : 
-                  card.variant === 'emphasis' ? 'text-white' : 'text-muted-foreground'
+                  card.variant === 'highlight' ? 'text-primary' : 'text-white/90'
                 }`}>
                   {card.text}
                 </p>
@@ -162,17 +135,12 @@ const ProblemSection = () => {
             </div>
           ))}
 
-          {/* Corner accent dots */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/20" />
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-0.5 rounded-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          {/* Top center dot */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary/40" />
+          
+          {/* Bottom accent line */}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         </div>
-
-        {/* Bottom tagline */}
-        <p className={`text-center text-muted-foreground mt-12 text-lg transition-all duration-700 delay-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        }`}>
-          <span className="text-white font-semibold">ELYAITRA</span> is here to change that.
-        </p>
       </div>
     </section>
   );
