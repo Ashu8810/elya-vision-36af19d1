@@ -1,4 +1,4 @@
-import { MessageSquare, GitBranch, BookOpen, Brain, Users, Star, Zap, GraduationCap } from "lucide-react";
+import { MessageSquare, GitBranch, BookOpen, Brain } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import GetStartedButton from "@/components/GetStartedButton";
 import FeatureSection from "@/components/FeatureSection";
@@ -77,19 +77,6 @@ const Index = () => {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
-          {/* Trust badge */}
-          <div className="opacity-0 animate-fade-in mb-8" style={{ animationDelay: "0s" }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-              <GraduationCap className="w-4 h-4 text-primary" />
-              <span className="text-sm text-primary font-medium">Trusted by 10,000+ Students</span>
-              <div className="flex items-center gap-0.5 ml-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Main heading with staggered animation */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8">
             <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
@@ -112,41 +99,8 @@ const Index = () => {
           </p>
 
           {/* CTA Button */}
-          <div className="opacity-0 animate-fade-in mb-12" style={{ animationDelay: "0.9s" }}>
+          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "0.9s" }}>
             <GetStartedButton>Start Learning Now — It's Free</GetStartedButton>
-          </div>
-
-          {/* Stats row */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "1.1s" }}>
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Users className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-left">
-                  <p className="text-2xl font-bold text-white">10K+</p>
-                  <p className="text-xs text-muted-foreground">Active Students</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-left">
-                  <p className="text-2xl font-bold text-white">500K+</p>
-                  <p className="text-xs text-muted-foreground">Questions Solved</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Star className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-left">
-                  <p className="text-2xl font-bold text-white">4.9/5</p>
-                  <p className="text-xs text-muted-foreground">Student Rating</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
