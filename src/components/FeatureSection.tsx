@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FeatureSectionProps {
   number: string;
@@ -8,6 +9,7 @@ interface FeatureSectionProps {
   description: string;
   icon: LucideIcon;
   reversed?: boolean;
+  lightMode?: boolean;
 }
 
 const FeatureSection = ({
@@ -17,6 +19,7 @@ const FeatureSection = ({
   description,
   icon: Icon,
   reversed = false,
+  lightMode = false,
 }: FeatureSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -59,10 +62,16 @@ const FeatureSection = ({
         <p className="text-sm font-semibold text-primary uppercase tracking-widest">
           {tagline}
         </p>
-        <h3 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+        <h3 className={cn(
+          "text-3xl sm:text-4xl font-bold leading-tight",
+          lightMode ? "text-gray-900" : "text-white"
+        )}>
           {title}
         </h3>
-        <p className="text-muted-foreground text-lg leading-relaxed max-w-lg">
+        <p className={cn(
+          "text-lg leading-relaxed max-w-lg",
+          lightMode ? "text-gray-600" : "text-muted-foreground"
+        )}>
           {description}
         </p>
       </div>
@@ -79,34 +88,60 @@ const FeatureSection = ({
       >
         <div className="relative group">
           {/* Glow effect behind */}
-          <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-3xl transition-all duration-500 group-hover:bg-primary/30" />
+          <div className={cn(
+            "absolute inset-0 blur-[60px] rounded-3xl transition-all duration-500 group-hover:opacity-100",
+            lightMode ? "bg-primary/15 group-hover:bg-primary/25" : "bg-primary/20 group-hover:bg-primary/30"
+          )} />
           
           {/* Device frame */}
-          <div className="relative rounded-3xl border border-border/30 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+          <div className={cn(
+            "relative rounded-3xl border overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]",
+            lightMode 
+              ? "border-gray-200 bg-gray-900" 
+              : "border-border/30 bg-card/80 backdrop-blur-sm"
+          )}>
             {/* Browser header */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-background/50">
+            <div className={cn(
+              "flex items-center gap-2 px-4 py-3 border-b",
+              lightMode ? "border-gray-800 bg-gray-900" : "border-border/30 bg-background/50"
+            )}>
               <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                <div className="w-3 h-3 rounded-full bg-green-500/70" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="px-4 py-1 rounded-lg bg-muted/30 text-xs text-muted-foreground">
+                <div className={cn(
+                  "px-4 py-1 rounded-lg text-xs",
+                  lightMode ? "bg-gray-800 text-gray-400" : "bg-muted/30 text-muted-foreground"
+                )}>
                   elyaitra.ai
                 </div>
               </div>
             </div>
             
             {/* Content area */}
-            <div className="aspect-[4/3] p-8 flex items-center justify-center">
+            <div className={cn(
+              "aspect-[4/3] p-8 flex items-center justify-center",
+              lightMode ? "bg-gray-900" : ""
+            )}>
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/30">
                   <Icon className="w-10 h-10 text-primary" />
                 </div>
                 <div className="space-y-2">
-                  <div className="h-4 w-40 bg-muted/30 rounded mx-auto" />
-                  <div className="h-3 w-32 bg-muted/20 rounded mx-auto" />
-                  <div className="h-3 w-36 bg-muted/20 rounded mx-auto" />
+                  <div className={cn(
+                    "h-4 w-40 rounded mx-auto",
+                    lightMode ? "bg-gray-700" : "bg-muted/30"
+                  )} />
+                  <div className={cn(
+                    "h-3 w-32 rounded mx-auto",
+                    lightMode ? "bg-gray-800" : "bg-muted/20"
+                  )} />
+                  <div className={cn(
+                    "h-3 w-36 rounded mx-auto",
+                    lightMode ? "bg-gray-800" : "bg-muted/20"
+                  )} />
                 </div>
               </div>
             </div>

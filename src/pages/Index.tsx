@@ -104,8 +104,8 @@ const Index = () => {
       {/* Problem Statement Section */}
       <ProblemSection />
 
-      {/* Features Section */}
-      <section className="py-20 px-6">
+      {/* Features Section - Light Theme */}
+      <section className="py-20 px-6 bg-white dark:bg-white">
         <div className="max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <FeatureSection
@@ -116,6 +116,7 @@ const Index = () => {
               description={feature.description}
               icon={feature.icon}
               reversed={index % 2 === 1}
+              lightMode
             />
           ))}
         </div>
