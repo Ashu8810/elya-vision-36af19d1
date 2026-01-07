@@ -6,6 +6,11 @@ import ProblemSection from "@/components/ProblemSection";
 import CommunitySection from "@/components/CommunitySection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 
+import aiChatMockup from "@/assets/ai-chat-mockup.png";
+import flowchartMockup from "@/assets/flowchart-mockup.png";
+import flashcardsMockup from "@/assets/flashcards-mockup.png";
+import quizMockup from "@/assets/quiz-mockup.png";
+
 const features = [
   {
     number: "01",
@@ -14,6 +19,7 @@ const features = [
     description:
       "ELYAITRA's AI Chat understands your questions and provides crystal-clear explanations. Whether you're stuck on calculus or confused about concepts, get instant, human-like help 24/7.",
     icon: MessageSquare,
+    mockupImage: aiChatMockup,
   },
   {
     number: "02",
@@ -22,6 +28,7 @@ const features = [
     description:
       "Transform complex topics into beautiful visual roadmaps. Our AI creates step-by-step flowcharts that show exactly how concepts connect, making learning intuitive and memorable.",
     icon: GitBranch,
+    mockupImage: flowchartMockup,
   },
   {
     number: "03",
@@ -30,6 +37,7 @@ const features = [
     description:
       "AI-optimized flashcards that adapt to your learning patterns. Our spaced repetition system presents cards at the perfect intervals for maximum retention.",
     icon: BookOpen,
+    mockupImage: flashcardsMockup,
   },
   {
     number: "04",
@@ -38,6 +46,7 @@ const features = [
     description:
       "Adaptive quizzes that evolve based on your performance. Get instant feedback, identify weak spots, and track your progress with detailed analytics.",
     icon: Brain,
+    mockupImage: quizMockup,
   },
 ];
 
@@ -111,6 +120,7 @@ const Index = () => {
               icon={feature.icon}
               reversed={index % 2 === 1}
               lightMode
+              mockupImage={feature.mockupImage}
             />
           ))}
         </div>
