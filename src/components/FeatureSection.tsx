@@ -67,24 +67,22 @@ const FeatureSection = ({
       >
         <div className="relative group">
           {/* Dark card container with rounded corners */}
-          <div className="relative bg-[#0a0a0a] rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-[1.02]">
-            {/* Top rounded corners accent */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-b-2xl" />
+          <div className="relative bg-[#0a0a0a] rounded-[2.5rem] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-[1.02]">
+            {/* Top notch accent */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-[#0a0a0a] rounded-b-2xl z-10" />
             
-            {/* Inner content area */}
-            <div className="relative rounded-2xl overflow-hidden mt-2">
-              {mockupImage ? (
-                <img 
-                  src={mockupImage} 
-                  alt={title}
-                  className="w-full h-auto object-cover rounded-2xl"
-                />
-              ) : (
-                <div className="aspect-[4/3] bg-[#111] flex items-center justify-center rounded-2xl">
-                  <Icon className="w-20 h-20 text-primary/50" />
-                </div>
-              )}
-            </div>
+            {/* Image fills the card completely */}
+            {mockupImage ? (
+              <img 
+                src={mockupImage} 
+                alt={title}
+                className="w-full h-auto object-cover block"
+              />
+            ) : (
+              <div className="aspect-[4/3] bg-[#111] flex items-center justify-center">
+                <Icon className="w-20 h-20 text-primary/50" />
+              </div>
+            )}
           </div>
         </div>
       </div>
