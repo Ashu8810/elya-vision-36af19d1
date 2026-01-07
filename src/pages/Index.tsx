@@ -5,7 +5,7 @@ import FeatureSection from "@/components/FeatureSection";
 import ProblemSection from "@/components/ProblemSection";
 import CommunitySection from "@/components/CommunitySection";
 import HowItWorksSection from "@/components/HowItWorksSection";
-import ShowcaseSection from "@/components/ShowcaseSection";
+
 
 import aiChatMockup from "@/assets/ai-chat-mockup.png";
 import flowchartMockup from "@/assets/flowchart-mockup.png";
@@ -127,8 +127,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* What You Get Showcase Section */}
-      <ShowcaseSection />
 
       {/* How It Works Section */}
       <HowItWorksSection />
