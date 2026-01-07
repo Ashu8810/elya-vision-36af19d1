@@ -2,9 +2,9 @@ import { MessageSquare, GitBranch, BookOpen, Brain } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import GetStartedButton from "@/components/GetStartedButton";
 import FeatureSection from "@/components/FeatureSection";
-import StepCard from "@/components/StepCard";
 import ProblemSection from "@/components/ProblemSection";
 import CommunitySection from "@/components/CommunitySection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 
 const features = [
   {
@@ -39,13 +39,6 @@ const features = [
       "Adaptive quizzes that evolve based on your performance. Get instant feedback, identify weak spots, and track your progress with detailed analytics.",
     icon: Brain,
   },
-];
-
-const steps = [
-  { number: "01", title: "Sign Up", description: "Create your free account" },
-  { number: "02", title: "Choose Path", description: "Pick your subjects & goals" },
-  { number: "03", title: "Learn & Practice", description: "Use AI tools to master topics" },
-  { number: "04", title: "Track Progress", description: "See your improvement" },
 ];
 
 const Index = () => {
@@ -124,43 +117,7 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 px-6 relative">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-        
-        <div className="relative z-10 max-w-5xl mx-auto">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              How It Works
-            </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              From Confused to <span className="text-primary">Confident</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Your journey with ELYAITRA in 4 simple steps
-            </p>
-          </div>
-
-          {/* Steps grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <div key={step.number} className="relative">
-                <StepCard
-                  number={step.number}
-                  title={step.title}
-                  description={step.description}
-                  delay={index * 150}
-                />
-                {/* Connector line */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-7 left-full w-full h-px bg-gradient-to-r from-primary/50 to-transparent" />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HowItWorksSection />
 
       {/* Community Section */}
       <CommunitySection />
