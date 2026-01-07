@@ -10,6 +10,7 @@ interface FeatureSectionProps {
   icon: LucideIcon;
   reversed?: boolean;
   lightMode?: boolean;
+  mockupImage?: string;
 }
 
 const FeatureSection = ({
@@ -20,6 +21,7 @@ const FeatureSection = ({
   icon: Icon,
   reversed = false,
   lightMode = false,
+  mockupImage,
 }: FeatureSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -93,58 +95,68 @@ const FeatureSection = ({
             lightMode ? "bg-primary/15 group-hover:bg-primary/25" : "bg-primary/20 group-hover:bg-primary/30"
           )} />
           
-          {/* Device frame */}
+          {/* Device frame with mockup image */}
           <div className={cn(
-            "relative rounded-3xl border overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]",
+            "relative rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]",
             lightMode 
-              ? "border-gray-200 bg-gray-900" 
-              : "border-border/30 bg-card/80 backdrop-blur-sm"
+              ? "shadow-gray-300/50" 
+              : "shadow-primary/10"
           )}>
-            {/* Browser header */}
-            <div className={cn(
-              "flex items-center gap-2 px-4 py-3 border-b",
-              lightMode ? "border-gray-800 bg-gray-900" : "border-border/30 bg-background/50"
-            )}>
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                <div className="w-3 h-3 rounded-full bg-green-500/70" />
-              </div>
-              <div className="flex-1 flex justify-center">
+            {mockupImage ? (
+              <img 
+                src={mockupImage} 
+                alt={title}
+                className="w-full h-auto object-cover"
+              />
+            ) : (
+              <>
+                {/* Fallback: Browser header */}
                 <div className={cn(
-                  "px-4 py-1 rounded-lg text-xs",
-                  lightMode ? "bg-gray-800 text-gray-400" : "bg-muted/30 text-muted-foreground"
+                  "flex items-center gap-2 px-4 py-3 border-b",
+                  lightMode ? "border-gray-800 bg-gray-900" : "border-border/30 bg-background/50"
                 )}>
-                  elyaitra.ai
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <div className={cn(
+                      "px-4 py-1 rounded-lg text-xs",
+                      lightMode ? "bg-gray-800 text-gray-400" : "bg-muted/30 text-muted-foreground"
+                    )}>
+                      elyaitra.ai
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
-            {/* Content area */}
-            <div className={cn(
-              "aspect-[4/3] p-8 flex items-center justify-center",
-              lightMode ? "bg-gray-900" : ""
-            )}>
-              <div className="text-center space-y-4">
-                <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/30">
-                  <Icon className="w-10 h-10 text-primary" />
+                
+                {/* Fallback: Content area */}
+                <div className={cn(
+                  "aspect-[4/3] p-8 flex items-center justify-center border",
+                  lightMode ? "bg-gray-900 border-gray-200" : "border-border/30 bg-card/80"
+                )}>
+                  <div className="text-center space-y-4">
+                    <div className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto border border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/30">
+                      <Icon className="w-10 h-10 text-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className={cn(
+                        "h-4 w-40 rounded mx-auto",
+                        lightMode ? "bg-gray-700" : "bg-muted/30"
+                      )} />
+                      <div className={cn(
+                        "h-3 w-32 rounded mx-auto",
+                        lightMode ? "bg-gray-800" : "bg-muted/20"
+                      )} />
+                      <div className={cn(
+                        "h-3 w-36 rounded mx-auto",
+                        lightMode ? "bg-gray-800" : "bg-muted/20"
+                      )} />
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <div className={cn(
-                    "h-4 w-40 rounded mx-auto",
-                    lightMode ? "bg-gray-700" : "bg-muted/30"
-                  )} />
-                  <div className={cn(
-                    "h-3 w-32 rounded mx-auto",
-                    lightMode ? "bg-gray-800" : "bg-muted/20"
-                  )} />
-                  <div className={cn(
-                    "h-3 w-36 rounded mx-auto",
-                    lightMode ? "bg-gray-800" : "bg-muted/20"
-                  )} />
-                </div>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </div>
       </div>
