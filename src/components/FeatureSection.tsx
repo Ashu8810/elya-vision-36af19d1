@@ -66,26 +66,17 @@ const FeatureSection = ({
         }`}
       >
         <div className="relative group">
-          {/* Outer dark frame */}
-          <div className="relative rounded-[2rem] bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] p-3 sm:p-4 shadow-[0_40px_100px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-[1.02]">
-            {/* Top notch */}
-            <div className="absolute -top-0 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#0a0a0a] rounded-b-xl z-20" />
-            
-            {/* Inner screen area */}
-            <div className="relative rounded-xl overflow-hidden bg-[#0f0f0f]">
-              {mockupImage ? (
-                <img 
-                  src={mockupImage} 
-                  alt={title}
-                  className="w-full h-auto object-cover block rounded-xl"
-                />
-              ) : (
-                <div className="aspect-[4/3] bg-[#111] flex items-center justify-center rounded-xl">
-                  <Icon className="w-20 h-20 text-primary/50" />
-                </div>
-              )}
+          {mockupImage ? (
+            <img 
+              src={mockupImage} 
+              alt={title}
+              className="w-full h-auto object-contain block rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="aspect-[4/3] bg-card/50 flex items-center justify-center rounded-2xl border border-border/30">
+              <Icon className="w-20 h-20 text-primary/50" />
             </div>
-          </div>
+          )}
         </div>
       </div>
 
