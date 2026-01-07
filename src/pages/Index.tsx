@@ -80,15 +80,11 @@ const Index = () => {
           {/* Main heading with staggered animation */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8">
             <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <span className="text-muted-foreground italic">Because School</span>
+              <span className="text-white">Learn Smarter with</span>
             </span>
             <br />
             <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              <span className="text-muted-foreground italic">Won't Teach </span>
-              <span className="text-primary italic">You </span>
-            </span>
-            <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-              <span className="text-white">This!</span>
+              <span className="text-primary">Artificial Intelligence</span>
             </span>
           </h1>
 
