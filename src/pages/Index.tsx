@@ -4,6 +4,7 @@ import GetStartedButton from "@/components/GetStartedButton";
 import FeatureSection from "@/components/FeatureSection";
 import StepCard from "@/components/StepCard";
 import ProblemSection from "@/components/ProblemSection";
+import CommunitySection from "@/components/CommunitySection";
 
 const features = [
   {
@@ -161,18 +162,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Bottom CTA Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Ready to Learn <span className="text-primary">Smarter</span>?
-          </h2>
-          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Join thousands of students already using ELYAITRA to master their subjects and ace their exams.
-          </p>
-          <GetStartedButton>Start Your Journey</GetStartedButton>
-        </div>
-      </section>
+      {/* Community Section */}
+      <CommunitySection />
 
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-border/30">
