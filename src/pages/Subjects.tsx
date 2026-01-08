@@ -1,4 +1,4 @@
-import { ArrowLeft, Brain, Code, FlaskConical, Cog, Atom, Calculator, BookOpen, Globe } from "lucide-react";
+import { ArrowLeft, Brain, Code, FlaskConical, Cog } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const subjects = [
@@ -7,48 +7,28 @@ const subjects = [
     title: "AI",
     description: "Master machine learning, neural networks, and AI fundamentals.",
     icon: Brain,
+    route: "/tutor/ai",
   },
   {
-    id: "programming",
-    title: "Programming",
-    description: "Solve algorithms and data structures with expert guidance.",
+    id: "python",
+    title: "Python Programming",
+    description: "Build strong programming and problem-solving skills.",
     icon: Code,
+    route: "/tutor/python",
   },
   {
     id: "chemistry",
     title: "Chemistry",
-    description: "Master organic, inorganic, and physical chemistry concepts.",
+    description: "Organic, inorganic, and physical chemistry explained clearly.",
     icon: FlaskConical,
+    route: "/tutor/chemistry",
   },
   {
     id: "mechanical",
     title: "Mechanical",
-    description: "Master mechanics, thermodynamics, and engineering principles.",
+    description: "Mechanics, thermodynamics, and engineering principles.",
     icon: Cog,
-  },
-  {
-    id: "physics",
-    title: "Physics",
-    description: "Explore quantum mechanics, relativity, and classical physics.",
-    icon: Atom,
-  },
-  {
-    id: "mathematics",
-    title: "Mathematics",
-    description: "Master calculus, algebra, statistics, and advanced mathematics.",
-    icon: Calculator,
-  },
-  {
-    id: "biology",
-    title: "Biology",
-    description: "Study cellular biology, genetics, and life sciences.",
-    icon: BookOpen,
-  },
-  {
-    id: "geography",
-    title: "Geography",
-    description: "Explore physical and human geography concepts.",
-    icon: Globe,
+    route: "/tutor/mechanical",
   },
 ];
 
@@ -85,7 +65,7 @@ const Subjects = () => {
               return (
                 <Link
                   key={subject.id}
-                  to={`/tutor/${subject.id}`}
+                  to={subject.route}
                   className="group relative p-8 rounded-2xl border border-border/50 bg-card/30 hover:border-primary/50 hover:bg-card/50 transition-all duration-300"
                 >
                   {/* Glow effect on hover */}
