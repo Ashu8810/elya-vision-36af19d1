@@ -1,6 +1,10 @@
-import { MessageSquare, GitBranch, BookOpen, Brain, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import GetStartedButton from "@/components/GetStartedButton";
+import aiChatMockup from "@/assets/ai-chat-mockup.png";
+import flowchartMockup from "@/assets/flowchart-mockup.png";
+import quizMockup from "@/assets/quiz-mockup.png";
+import flashcardsMockup from "@/assets/flashcards-mockup.png";
 
 const featuresData = [
   {
@@ -10,7 +14,7 @@ const featuresData = [
     accent: "Instant Clarity",
     description:
       "Get immediate answers to your questions with our advanced AI chat. Whether you're stuck on a complex concept or need quick clarification, ELYAITRA's AI assistant provides detailed, contextual explanations tailored to your learning level.",
-    icon: MessageSquare,
+    mockup: aiChatMockup,
   },
   {
     number: "02",
@@ -19,7 +23,7 @@ const featuresData = [
     accent: "See the Path",
     description:
       "Transform complex topics into visual learning paths. Our smart flowcharts break down subjects into digestible steps, showing you exactly how concepts connect and building your understanding systematically.",
-    icon: GitBranch,
+    mockup: flowchartMockup,
   },
   {
     number: "03",
@@ -28,7 +32,7 @@ const featuresData = [
     accent: "Remember Everything",
     description:
       "Master any subject with AI-optimized flashcards. Our spaced repetition system learns your patterns and presents cards at the perfect intervals for maximum retention, making revision efficient and effective.",
-    icon: BookOpen,
+    mockup: flashcardsMockup,
   },
   {
     number: "04",
@@ -37,7 +41,7 @@ const featuresData = [
     accent: "Test Your Knowledge",
     description:
       "Practice with intelligent quizzes that adapt to your performance. Get instant feedback, identify weak areas, and track your progress with detailed analytics that help you focus on what matters most.",
-    icon: Brain,
+    mockup: quizMockup,
   },
 ];
 
@@ -75,7 +79,6 @@ const Features = () => {
         <div className="max-w-6xl mx-auto space-y-32">
           {featuresData.map((feature, index) => {
             const isReversed = index % 2 === 1;
-            const Icon = feature.icon;
 
             return (
               <div
@@ -100,37 +103,15 @@ const Features = () => {
                   </p>
                 </div>
 
-                {/* UI Preview Card */}
+                {/* Mockup Image */}
                 <div className="flex-1 w-full max-w-lg">
                   <div className="relative">
                     <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-3xl" />
-                    <div className="relative aspect-[4/3] rounded-3xl bg-card border border-border/30 shadow-xl overflow-hidden">
-                      <div className="h-full flex flex-col">
-                        <div className="flex items-center gap-2 px-6 py-4 border-b border-border/30">
-                          <div className="flex gap-1.5">
-                            <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                            <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                          </div>
-                          <div className="flex-1 flex justify-center">
-                            <div className="px-4 py-1 rounded-lg bg-muted/30 text-xs text-muted-foreground">
-                              ELYAITRA / {feature.title}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex-1 p-6 flex items-center justify-center">
-                          <div className="text-center space-y-4">
-                            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto border border-primary/30">
-                              <Icon className="w-8 h-8 text-primary" />
-                            </div>
-                            <div className="space-y-2">
-                              <div className="h-3 w-32 bg-muted/30 rounded mx-auto" />
-                              <div className="h-2 w-24 bg-muted/20 rounded mx-auto" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <img 
+                      src={feature.mockup} 
+                      alt={feature.title}
+                      className="relative w-full rounded-2xl shadow-2xl"
+                    />
                   </div>
                 </div>
               </div>
