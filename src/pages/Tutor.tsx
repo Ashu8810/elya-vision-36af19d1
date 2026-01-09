@@ -15,7 +15,7 @@ import NotesPanel from "@/components/tutor/NotesPanel";
 import ChatTutor from "@/components/tutor/ChatTutor";
 import FlashcardViewer from "@/components/tutor/FlashcardViewer";
 import FlowchartCanvas from "@/components/tutor/FlowchartCanvas";
-import { SubjectSwitcher } from "@/components/tutor/SubjectSwitcher";
+
 import { useToast } from "@/hooks/use-toast";
 
 type WorkspaceTab = "chat" | "flashcards" | "flowchart";
@@ -102,10 +102,6 @@ const Tutor = () => {
           onStartTutoring={handleStartTutoring}
           selectedNote={selectedNote}
         />
-        {/* Subject Switcher in Left Panel */}
-        <div className="p-4 border-t border-border/50 bg-card/30">
-          <SubjectSwitcher />
-        </div>
       </aside>
 
       {/* Main Content - Right Panel */}
