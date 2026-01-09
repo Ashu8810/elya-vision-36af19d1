@@ -150,7 +150,7 @@ const Tutor = () => {
 
         {/* Workspace Content */}
         <div className="flex-1 overflow-hidden">
-          {activeTab === "chat" && <ChatTutor />}
+          {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} />}
           {activeTab === "flashcards" && <FlashcardViewer />}
           {activeTab === "flowchart" && <FlowchartCanvas />}
         </div>
