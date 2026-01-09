@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
 import Subjects from "./pages/Subjects";
-import Tutor from "./pages/Tutor";
+
 import TutorAI from "./pages/TutorAI";
 import TutorPython from "./pages/TutorPython";
 import TutorChemistry from "./pages/TutorChemistry";
@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/features" element={<Features />} />
           <Route path="/subjects" element={<Subjects />} />
-          <Route path="/tutor" element={<Tutor />} />
+          
           <Route path="/tutor/ai" element={<TutorAI />} />
           <Route path="/tutor/python" element={<TutorPython />} />
           <Route path="/tutor/chemistry" element={<TutorChemistry />} />
