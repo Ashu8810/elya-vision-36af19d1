@@ -16,6 +16,7 @@ import ChatTutor from "@/components/tutor/ChatTutor";
 import FlashcardViewer from "@/components/tutor/FlashcardViewer";
 import FlowchartCanvas from "@/components/tutor/FlowchartCanvas";
 import { SubjectSwitcher } from "@/components/tutor/SubjectSwitcher";
+import { useToast } from "@/hooks/use-toast";
 
 type WorkspaceTab = "chat" | "flashcards" | "flowchart";
 
@@ -33,9 +34,12 @@ const Tutor = () => {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [mobileLeftPanelOpen, setMobileLeftPanelOpen] = useState(false);
+  const [tutoringStarted, setTutoringStarted] = useState(false);
+  const { toast } = useToast();
 
   const handleNoteSelect = (note: Note | null) => {
     setSelectedNote(note);
+    setTutoringStarted(false);
   };
 
   const handleGenerateSummary = () => {
@@ -44,6 +48,18 @@ const Tutor = () => {
 
   const handleGenerateFlashcards = () => {
     setActiveTab("flashcards");
+  };
+
+  const handleStartTutoring = () => {
+    if (selectedNote) {
+      setActiveTab("chat");
+      setTutoringStarted(true);
+      setMobileLeftPanelOpen(false);
+      toast({
+        title: "📚 Tutoring Started!",
+        description: `Now teaching: ${selectedNote.title}`,
+      });
+    }
   };
 
   const tabs = [
@@ -83,6 +99,7 @@ const Tutor = () => {
           onNoteSelect={handleNoteSelect}
           onGenerateSummary={handleGenerateSummary}
           onGenerateFlashcards={handleGenerateFlashcards}
+          onStartTutoring={handleStartTutoring}
           selectedNote={selectedNote}
         />
         {/* Subject Switcher in Left Panel */}
@@ -150,7 +167,7 @@ const Tutor = () => {
 
         {/* Workspace Content */}
         <div className="flex-1 overflow-hidden">
-          {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} />}
+          {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} startTeaching={tutoringStarted} onTeachingStarted={() => setTutoringStarted(false)} />}
           {activeTab === "flashcards" && <FlashcardViewer />}
           {activeTab === "flowchart" && <FlowchartCanvas />}
         </div>

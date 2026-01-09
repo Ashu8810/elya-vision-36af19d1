@@ -25,6 +25,7 @@ interface NotesPanelProps {
   onNoteSelect: (note: Note | null) => void;
   onGenerateSummary: () => void;
   onGenerateFlashcards: () => void;
+  onStartTutoring: () => void;
   selectedNote: Note | null;
 }
 
@@ -42,7 +43,7 @@ const difficultyColors = {
   Advanced: "bg-rose-500/20 text-rose-400 border-rose-500/30",
 };
 
-const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, selectedNote }: NotesPanelProps) => {
+const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, onStartTutoring, selectedNote }: NotesPanelProps) => {
   const [filterSubject, setFilterSubject] = useState<string | null>(null);
 
   const subjects = [...new Set(preloadedNotes.map((note) => note.subject))];
@@ -148,6 +149,7 @@ const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, sel
         <Button
           className="w-full gap-2"
           disabled={!selectedNote}
+          onClick={onStartTutoring}
         >
           <BookOpen className="w-4 h-4" />
           Use for Tutoring
