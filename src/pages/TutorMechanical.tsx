@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   MessageSquare,
   Layers,
-  GitBranch,
   Menu,
   X,
   ArrowLeft,
@@ -14,10 +13,10 @@ import { cn } from "@/lib/utils";
 import NotesPanel from "@/components/tutor/NotesPanel";
 import ChatTutor from "@/components/tutor/ChatTutor";
 import FlashcardViewer from "@/components/tutor/FlashcardViewer";
-import FlowchartCanvas from "@/components/tutor/FlowchartCanvas";
+
 import { useToast } from "@/hooks/use-toast";
 
-type WorkspaceTab = "chat" | "flashcards" | "flowchart";
+type WorkspaceTab = "chat" | "flashcards";
 
 interface Note {
   id: string;
@@ -64,7 +63,6 @@ const TutorMechanical = () => {
   const tabs = [
     { id: "chat" as WorkspaceTab, label: "Chat", icon: MessageSquare },
     { id: "flashcards" as WorkspaceTab, label: "Flashcards", icon: Layers },
-    { id: "flowchart" as WorkspaceTab, label: "Flowchart", icon: GitBranch },
   ];
 
   return (
@@ -170,7 +168,6 @@ const TutorMechanical = () => {
         <div className="flex-1 overflow-hidden">
           {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} startTeaching={tutoringStarted} onTeachingStarted={() => setTutoringStarted(false)} subjectName="Mechanical Engineering" />}
           {activeTab === "flashcards" && <FlashcardViewer />}
-          {activeTab === "flowchart" && <FlowchartCanvas />}
         </div>
       </div>
     </div>
