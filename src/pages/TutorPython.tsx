@@ -304,9 +304,6 @@ const TutorPython = () => {
         <div className="border-t border-border/50 bg-card/30 backdrop-blur-sm p-4">
           <div className="max-w-3xl mx-auto">
             <div className="relative flex items-end gap-2 bg-background border border-border/50 rounded-2xl p-2 focus-within:border-green-500/50 transition-colors">
-              <Button variant="ghost" size="icon" className="shrink-0 text-muted-foreground hover:text-foreground">
-                <Paperclip className="w-5 h-5" />
-              </Button>
               <Textarea
                 ref={textareaRef}
                 value={input}
@@ -316,9 +313,6 @@ const TutorPython = () => {
                 className="flex-1 min-h-[44px] max-h-32 resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 p-2"
                 rows={1}
               />
-              <Button variant="ghost" size="icon" className="shrink-0 text-muted-foreground hover:text-foreground">
-                <Mic className="w-5 h-5" />
-              </Button>
               <Button onClick={handleSend} disabled={!input.trim() || isTyping} size="icon" className="shrink-0 rounded-xl bg-green-500 hover:bg-green-600">
                 <Send className="w-4 h-4" />
               </Button>
