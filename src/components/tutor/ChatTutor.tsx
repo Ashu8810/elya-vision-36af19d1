@@ -34,6 +34,8 @@ interface Message {
 
 interface ChatTutorProps {
   selectedNote?: Note | null;
+  startTeaching?: boolean;
+  onTeachingStarted?: () => void;
 }
 
 const suggestedPrompts = [
@@ -49,7 +51,7 @@ const difficultyColors = {
   Advanced: "bg-rose-500/20 text-rose-400 border-rose-500/30",
 };
 
-const ChatTutor = ({ selectedNote }: ChatTutorProps) => {
+const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutorProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -63,6 +65,27 @@ const ChatTutor = ({ selectedNote }: ChatTutorProps) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Start teaching when triggered
+  useEffect(() => {
+    if (startTeaching && selectedNote) {
+      // Clear previous messages and start fresh
+      setMessages([]);
+      setIsTyping(true);
+      
+      setTimeout(() => {
+        const welcomeMessage: Message = {
+          id: Date.now().toString(),
+          role: "assistant",
+          content: `Welcome! I'm ready to help you learn about **${selectedNote.title}**.\n\nThis is a ${selectedNote.difficulty.toLowerCase()} level topic covering ${selectedNote.topic}. The material spans ${selectedNote.pages} pages.\n\nLet me give you an overview and then we can dive into any questions you have. What would you like to start with?`,
+          timestamp: new Date(),
+        };
+        setMessages([welcomeMessage]);
+        setIsTyping(false);
+        onTeachingStarted?.();
+      }, 1000);
+    }
+  }, [startTeaching, selectedNote, onTeachingStarted]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
