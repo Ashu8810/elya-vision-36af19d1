@@ -168,7 +168,7 @@ const TutorMechanical = () => {
 
         {/* Workspace Content */}
         <div className="flex-1 overflow-hidden">
-          {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} startTeaching={tutoringStarted} onTeachingStarted={() => setTutoringStarted(false)} />}
+          {activeTab === "chat" && <ChatTutor selectedNote={selectedNote} startTeaching={tutoringStarted} onTeachingStarted={() => setTutoringStarted(false)} subjectName="Mechanical Engineering" />}
           {activeTab === "flashcards" && <FlashcardViewer />}
           {activeTab === "flowchart" && <FlowchartCanvas />}
         </div>
