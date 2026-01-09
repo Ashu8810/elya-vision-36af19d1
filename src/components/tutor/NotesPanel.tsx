@@ -38,7 +38,6 @@ const preloadedNotes: Note[] = [
   { id: "3", title: "Python Data Structures", subject: "Programming", topic: "Python", difficulty: "Intermediate", pages: 32 },
   { id: "4", title: "Organic Chemistry Fundamentals", subject: "Chemistry", topic: "Organic", difficulty: "Beginner", pages: 56 },
   { id: "5", title: "Thermodynamics Principles", subject: "Mechanical", topic: "Thermodynamics", difficulty: "Intermediate", pages: 40 },
-  { id: "6", title: "Calculus Integration Methods", subject: "Mathematics", topic: "Calculus", difficulty: "Advanced", pages: 28 },
 ];
 
 const difficultyColors = {
