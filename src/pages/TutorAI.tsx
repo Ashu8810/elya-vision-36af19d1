@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SubjectSwitcher } from "@/components/tutor/SubjectSwitcher";
 import {
   Send,
   Bot,
@@ -135,9 +134,6 @@ const TutorAI = () => {
         </div>
 
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="p-4 border-b border-border/50">
-            <SubjectSwitcher />
-          </div>
           <div className="p-4 pb-2">
             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
               <History className="w-3 h-3" />
