@@ -57,6 +57,57 @@ const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutor
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const previousNoteIdRef = useRef<string | null>(null);
+
+  const getStorageKey = (noteId: string) => `tutor-chat-${noteId}`;
+
+  // Load messages from localStorage when note changes
+  useEffect(() => {
+    if (selectedNote) {
+      // Save current messages to previous note before switching
+      if (previousNoteIdRef.current && previousNoteIdRef.current !== selectedNote.id && messages.length > 0) {
+        const prevKey = getStorageKey(previousNoteIdRef.current);
+        localStorage.setItem(prevKey, JSON.stringify(messages));
+      }
+
+      // Load messages for the new note
+      const storageKey = getStorageKey(selectedNote.id);
+      const savedMessages = localStorage.getItem(storageKey);
+      if (savedMessages) {
+        try {
+          const parsed = JSON.parse(savedMessages);
+          // Convert timestamp strings back to Date objects
+          const messagesWithDates = parsed.map((msg: Message) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          }));
+          setMessages(messagesWithDates);
+        } catch {
+          setMessages([]);
+        }
+      } else {
+        setMessages([]);
+      }
+
+      previousNoteIdRef.current = selectedNote.id;
+    } else {
+      // Save current messages before clearing
+      if (previousNoteIdRef.current && messages.length > 0) {
+        const prevKey = getStorageKey(previousNoteIdRef.current);
+        localStorage.setItem(prevKey, JSON.stringify(messages));
+      }
+      setMessages([]);
+      previousNoteIdRef.current = null;
+    }
+  }, [selectedNote?.id]);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (selectedNote && messages.length > 0) {
+      const storageKey = getStorageKey(selectedNote.id);
+      localStorage.setItem(storageKey, JSON.stringify(messages));
+    }
+  }, [messages, selectedNote?.id]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,8 +120,7 @@ const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutor
   // Start teaching when triggered
   useEffect(() => {
     if (startTeaching && selectedNote) {
-      // Clear previous messages and start fresh
-      setMessages([]);
+      // Clear previous messages and start fresh for this note
       setIsTyping(true);
       
       setTimeout(() => {
@@ -127,6 +177,11 @@ const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutor
 
   const clearChat = () => {
     setMessages([]);
+    // Also clear from localStorage
+    if (selectedNote) {
+      const storageKey = getStorageKey(selectedNote.id);
+      localStorage.removeItem(storageKey);
+    }
   };
 
   return (
