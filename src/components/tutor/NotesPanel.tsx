@@ -27,6 +27,7 @@ interface NotesPanelProps {
   onGenerateFlashcards: () => void;
   onStartTutoring: () => void;
   selectedNote: Note | null;
+  subjectFilter?: string;
 }
 
 const preloadedNotes: Note[] = [
@@ -43,14 +44,13 @@ const difficultyColors = {
   Advanced: "bg-rose-500/20 text-rose-400 border-rose-500/30",
 };
 
-const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, onStartTutoring, selectedNote }: NotesPanelProps) => {
-  const [filterSubject, setFilterSubject] = useState<string | null>(null);
-
-  const subjects = [...new Set(preloadedNotes.map((note) => note.subject))];
-
-  const filteredNotes = filterSubject
-    ? preloadedNotes.filter((note) => note.subject === filterSubject)
+const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, onStartTutoring, selectedNote, subjectFilter }: NotesPanelProps) => {
+  // If subjectFilter is provided, use it directly; otherwise allow manual filtering
+  const baseNotes = subjectFilter 
+    ? preloadedNotes.filter((note) => note.subject === subjectFilter)
     : preloadedNotes;
+  
+  const filteredNotes = baseNotes;
 
   return (
     <div className="h-full flex flex-col bg-card/50 backdrop-blur-sm border-r border-border/50">
@@ -70,27 +70,6 @@ const NotesPanel = ({ onNoteSelect, onGenerateSummary, onGenerateFlashcards, onS
       {/* Content */}
       <ScrollArea className="flex-1">
         <div className="p-4">
-          {/* Subject Filters */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            <Badge
-              variant={filterSubject === null ? "default" : "outline"}
-              className="cursor-pointer transition-all hover:scale-105"
-              onClick={() => setFilterSubject(null)}
-            >
-              All
-            </Badge>
-            {subjects.map((subject) => (
-              <Badge
-                key={subject}
-                variant={filterSubject === subject ? "default" : "outline"}
-                className="cursor-pointer transition-all hover:scale-105"
-                onClick={() => setFilterSubject(subject)}
-              >
-                {subject}
-              </Badge>
-            ))}
-          </div>
-
           {/* Notes List */}
           <div className="space-y-2">
             {filteredNotes.map((note) => (

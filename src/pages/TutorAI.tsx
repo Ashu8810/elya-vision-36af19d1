@@ -100,6 +100,7 @@ const TutorAI = () => {
           onGenerateFlashcards={handleGenerateFlashcards}
           onStartTutoring={handleStartTutoring}
           selectedNote={selectedNote}
+          subjectFilter="AI"
         />
       </aside>
 
