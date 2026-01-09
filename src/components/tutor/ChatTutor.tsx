@@ -36,6 +36,7 @@ interface ChatTutorProps {
   selectedNote?: Note | null;
   startTeaching?: boolean;
   onTeachingStarted?: () => void;
+  subjectName?: string;
 }
 
 const suggestedPrompts = [
@@ -51,7 +52,7 @@ const difficultyColors = {
   Advanced: "bg-rose-500/20 text-rose-400 border-rose-500/30",
 };
 
-const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutorProps) => {
+const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted, subjectName = "your subject" }: ChatTutorProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -248,9 +249,9 @@ const ChatTutor = ({ selectedNote, startTeaching, onTeachingStarted }: ChatTutor
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center mb-4">
                     <Bot className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Start Learning</h3>
+                  <h3 className="text-xl font-bold mb-2">Start Learning {subjectName}</h3>
                   <p className="text-muted-foreground mb-6 max-w-sm">
-                    Select a note from the left panel to get started, or ask a general question.
+                    Select a note from the left panel to get started with {subjectName}, or ask a general question.
                   </p>
                 </>
               )}
