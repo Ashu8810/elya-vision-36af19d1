@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 import {
   Send,
   Bot,
@@ -11,16 +12,28 @@ import {
   Brain,
   Lightbulb,
   Trash2,
-  Mic,
-  Paperclip,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+interface Note {
+  id: string;
+  title: string;
+  subject: string;
+  topic: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  pages: number;
+}
 
 interface Message {
   id: string;
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
+}
+
+interface ChatTutorProps {
+  selectedNote?: Note | null;
 }
 
 const suggestedPrompts = [
@@ -30,7 +43,13 @@ const suggestedPrompts = [
   { icon: Sparkles, text: "Create a study guide" },
 ];
 
-const ChatTutor = () => {
+const difficultyColors = {
+  Beginner: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+  Intermediate: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+  Advanced: "bg-rose-500/20 text-rose-400 border-rose-500/30",
+};
+
+const ChatTutor = ({ selectedNote }: ChatTutorProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -117,13 +136,46 @@ const ChatTutor = () => {
         <div className="p-4">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center mb-4">
-                <Bot className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Start Learning</h3>
-              <p className="text-muted-foreground mb-6 max-w-sm">
-                Ask questions about your selected notes and I'll help you understand the material better.
-              </p>
+              {selectedNote ? (
+                <>
+                  {/* Selected Note Card */}
+                  <div className="w-full max-w-md mb-6 p-4 rounded-xl border border-primary/30 bg-primary/5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                        <FileText className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <h4 className="font-semibold text-sm">{selectedNote.title}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs text-muted-foreground">{selectedNote.topic}</span>
+                          <span className="text-xs text-muted-foreground">•</span>
+                          <span className="text-xs text-muted-foreground">{selectedNote.pages} pages</span>
+                        </div>
+                        <Badge
+                          variant="outline"
+                          className={cn("mt-2 text-xs", difficultyColors[selectedNote.difficulty])}
+                        >
+                          {selectedNote.difficulty}
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Ready to Learn!</h3>
+                  <p className="text-muted-foreground mb-6 max-w-sm">
+                    Ask questions about <span className="text-primary font-medium">{selectedNote.title}</span> and I'll help you understand.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center mb-4">
+                    <Bot className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Start Learning</h3>
+                  <p className="text-muted-foreground mb-6 max-w-sm">
+                    Select a note from the left panel to get started, or ask a general question.
+                  </p>
+                </>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md">
                 {suggestedPrompts.map((prompt, index) => (
                   <button
@@ -211,21 +263,15 @@ const ChatTutor = () => {
       {/* Input Area */}
       <div className="p-4 border-t border-border/50 bg-card/30">
         <div className="relative flex items-end gap-2 bg-background border border-border/50 rounded-2xl p-2 focus-within:border-primary/50 transition-colors">
-          <Button variant="ghost" size="icon" className="shrink-0 text-muted-foreground hover:text-foreground">
-            <Paperclip className="w-5 h-5" />
-          </Button>
           <Textarea
             ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about your notes..."
+            placeholder={selectedNote ? `Ask about ${selectedNote.title}...` : "Ask about your notes..."}
             className="flex-1 min-h-[44px] max-h-32 resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 p-2 text-sm"
             rows={1}
           />
-          <Button variant="ghost" size="icon" className="shrink-0 text-muted-foreground hover:text-foreground">
-            <Mic className="w-5 h-5" />
-          </Button>
           <Button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
